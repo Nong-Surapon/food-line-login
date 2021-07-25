@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import { Image } from 'antd';
 import liff from '@line/liff/dist/lib';
-import { Form, Input, Button, Checkbox } from 'antd';
 
 const Login = () => {
   const [pictureUrl, setPictureUrl] = useState('');
@@ -15,7 +14,7 @@ const Login = () => {
     window.location.reload();
   };
 
-  const initLine = () => {
+  const getLine = () => {
     liff.init(
       { liffId: '1655207232-0MxWBN5K' },
       () => {
@@ -47,17 +46,19 @@ const Login = () => {
   };
 
   useEffect(() => {
-    initLine();
+    getLine();
   }, []);
 
   return (
     <>
       <h1>Line Login</h1>
-      <img src={pictureUrl} width="300px" height="300px" />
+      <Image width={200} src={pictureUrl} />
       <h2>{idToken}</h2>
       <h2>{displayName}</h2>
       <h2>{statusMessage}</h2>
       <h2>{userId}</h2>
+      <button onClick={() => logout()} />
+      Logout <button />
     </>
   );
 };
