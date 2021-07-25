@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { Image } from 'antd';
+import { Image, Button } from 'antd';
 import liff from '@line/liff/dist/lib';
 
 const Login = () => {
-  const [pictureUrl, setPictureUrl] = useState('');
+  const [pictureUrl, setPictureUrl] = useState(
+    'https://profile.line-scdn.net/0hp4UmLn1zLxtoFAaAdIxQTFRRIXYfOilTEHc0Lh8UeHlNcWkfAyVmdUsTcyNCI2odB3MzeERBJCpC/preview'
+  );
   const [idToken, setIdToken] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
   const [userId, setuserId] = useState('');
 
   const logout = () => {
+    console.log('logout');
     liff.logout();
     window.location.reload();
   };
 
   const getLine = () => {
+    console.log('login');
     liff.init(
       { liffId: '1655207232-0MxWBN5K' },
       () => {
@@ -57,8 +61,9 @@ const Login = () => {
       <h2>{displayName}</h2>
       <h2>{statusMessage}</h2>
       <h2>{userId}</h2>
-      <button onClick={() => logout()} />
-      Logout <button />
+      <Button onClick={() => logout()} type="primary">
+        Logout
+      </Button>
     </>
   );
 };
