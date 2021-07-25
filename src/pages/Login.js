@@ -19,17 +19,17 @@ const Login = () => {
 
   const getLine = () => {
     console.log('login');
-    liff.init(
-      { liffId: '1655207232-0MxWBN5K' },
-      () => {
-        if (liff.isLoggedIn()) {
-          runApp();
-        } else {
-          liff.login();
-        }
-      },
-      (err) => console.error(err)
-    );
+    // liff.init(
+    //   { liffId: '1655207232-0MxWBN5K' },
+    //   () => {
+    //     if (liff.isLoggedIn()) {
+    //       runApp();
+    //     } else {
+    //       liff.login();
+    //     }
+    //   },
+    //   (err) => console.error(err)
+    // );
   };
 
   const runApp = () => {
@@ -56,11 +56,11 @@ const Login = () => {
   return (
     <>
       <h1>Line Login</h1>
-      <Image width={200} src={pictureUrl} />
+      {/* <Image width={200} src={pictureUrl} />
       <h2>{idToken}</h2>
       <h2>{displayName}</h2>
       <h2>{statusMessage}</h2>
-      <h2>{userId}</h2>
+      <h2>{userId}</h2> */}
       <Button onClick={() => logout()} type="primary">
         Logout
       </Button>
