@@ -33,20 +33,19 @@ const Login = () => {
   };
 
   const runApp = () => {
-    const idToken = liff.getIDToken();
-    console.log('idToken', idToken);
-    setIdToken(idToken);
-
-    liff
-      .getProfile()
-      .then((profile) => {
-        console.log('profile', profile);
-        setDisplayName(profile.displayName);
-        setPictureUrl(profile.pictureUrl);
-        setStatusMessage(profile.statusMessage);
-        setuserId(profile.userId);
-      })
-      .catch((err) => console.error(err));
+    // const idToken = liff.getIDToken();
+    // console.log('idToken', idToken);
+    // setIdToken(idToken);
+    // liff
+    //   .getProfile()
+    //   .then((profile) => {
+    //     console.log('profile', profile);
+    //     setDisplayName(profile.displayName);
+    //     setPictureUrl(profile.pictureUrl);
+    //     setStatusMessage(profile.statusMessage);
+    //     setuserId(profile.userId);
+    //   })
+    //   .catch((err) => console.error(err));
   };
 
   useEffect(() => {
