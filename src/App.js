@@ -1,58 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import liff from '@line/liff';
+const liff = window.liff;
 
 function App() {
-  const [pictureUrl, setPictureUrl] = useState(
-    'https://profile.line-scdn.net/0hp4UmLn1zLxtoFAaAdIxQTFRRIXYfOilTEHc0Lh8UeHlNcWkfAyVmdUsTcyNCI2odB3MzeERBJCpC/preview'
-  );
+  const [pictureUrl, setPictureUrl] = useState('');
   const [idToken, setIdToken] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [statusMessage, setStatusMessage] = useState('');
-  const [userId, setuserId] = useState('');
+  const [userId, setUserId] = useState('');
 
   const logout = () => {
-    console.log('logout');
     liff.logout();
     window.location.reload();
   };
 
-  const getLine = () => {
-    liff
-      .init({
-        liffId: '1655207232-0MxWBN5K',
-      })
-      .then(() => {
-        if (!liff.isLoggedIn()) {
-          liff.login();
-        } else {
-          runApp();
-        }
-      })
-      .catch((err) => {
-        document.getElementById('liffAppContent').classList.add('hidden');
-        document
-          .getElementById('liffInitErrorMessage')
-          .classList.remove('hidden');
-      });
-  };
-
-  const runApp = () => {
-    const idToken = liff.getIDToken();
-    setIdToken(idToken);
-    liff
-      .getProfile()
-      .then((profile) => {
-        setDisplayName(profile.displayName);
-        setPictureUrl(profile.pictureUrl);
-        setStatusMessage(profile.statusMessage);
-        setuserId(profile.userId);
-      })
-      .catch((err) => console.error(err));
-  };
+  async function fetchLiff() {
+    await liff.init({ liffId: `1655207232-0MxWBN5K` }).catch((err) => {
+      throw err;
+    });
+    if (liff.isLoggedIn()) {
+      let getProfile = await liff.getProfile();
+      setIdToken(getProfile.idToken);
+      setDisplayName(getProfile.displayName);
+      setStatusMessage(getProfile.statusMessage);
+      setUserId(getProfile.userId);
+      setPictureUrl(getProfile.pictureUrl);
+      // window.location.href =
+      //   'https://docs.google.com/forms/d/e/1FAIpQLSdH7uwMINodj3dJSPpss-_DnJIiQ4t_U0TnJ__rZDamfbDUdA/viewform?usp=pp_url&entry.862938837=' +
+      //   getProfile.userId +
+      //   '&entry.428673667=' +
+      //   getProfile.displayName +
+      //   '&entry.845592098=' +
+      //   getProfile.pictureUrl;
+    } else {
+      liff.login();
+    }
+  }
 
   useEffect(() => {
-    getLine();
+    fetchLiff();
   }, []);
 
   return (
