@@ -20,6 +20,7 @@ function App() {
     });
     if (liff.isLoggedIn()) {
       let getProfile = await liff.getProfile();
+      console.log(getProfile);
       setIdToken(getProfile.idToken);
       setDisplayName(getProfile.displayName);
       setStatusMessage(getProfile.statusMessage);
@@ -46,10 +47,10 @@ function App() {
       <>
         <h1>Line Login</h1>
         <img src={pictureUrl} alt="Logo" />
-        <h2>{idToken}</h2>
-        <h2>{displayName}</h2>
-        <h2>{statusMessage}</h2>
-        <h2>{userId}</h2>
+        <h2>idToken: {idToken}</h2>
+        <h2>displayName: {displayName}</h2>
+        <h2>statusMessage: {statusMessage}</h2>
+        <h2>userId: {userId}</h2>
         <botton onClick={() => logout()} type="primary">
           Logout
         </botton>
